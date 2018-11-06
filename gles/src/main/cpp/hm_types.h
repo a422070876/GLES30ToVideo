@@ -24,6 +24,11 @@ typedef struct struct_hm_video_glsl_program {
 
 typedef struct struct_hm_gles_model {
     GLuint *textures;
+    GLuint *frame_buffers;
+    GLuint *frame_bos;
+
+
+    hm_video_glsl_program *frame_program;
     GLuint *video_bos;
     float *vertex_data;
     float *texture_vertex_data;
@@ -31,7 +36,7 @@ typedef struct struct_hm_gles_model {
     float *st_matrix;
 
     int left,top,right,bottom;
-
+    int width,height;
 
     void (*init_frame)(struct struct_hm_gles_model* gles_model);
     void (*free_frame)(struct struct_hm_gles_model* gles_model);
@@ -44,8 +49,9 @@ void hm_gles_model_free(hm_gles_model *gles_model);
 
 void hm_gles_init_video_vertex_buffers(hm_gles_model *gles_model);
 void hm_gles_delete_video_vertex_buffers(hm_gles_model *gles_model);
-void hm_sdk_video_bind_vertex_buffers(hm_video_glsl_program *video_program,GLuint *video_bos,
+void hm_gles_video_bind_vertex_buffers(hm_video_glsl_program *video_program,GLuint *video_bos,
                                       float *st_matrix);
+void hm_gles_frame_bind_vertex_buffers(hm_video_glsl_program *frame_program,GLuint *frame_bos);
 
 void hm_gles_init_texture(hm_gles_model *gles_model);
 void hm_gles_delete_texture(hm_gles_model *gles_model);

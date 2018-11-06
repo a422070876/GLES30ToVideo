@@ -20,6 +20,7 @@ public class GLES {
     private SurfaceTexture surfaceTexture;
 
     public void initFrame(int videoWidth,int videoHeight,int screenWidth,int screenHeight){
+        setSize(gles,videoWidth,videoHeight);
         initFrame(gles);
         int left,top,viewWidth,viewHeight;
         float sh = screenWidth*1.0f/screenHeight;
@@ -66,6 +67,8 @@ public class GLES {
     private native long initGLES();
 
     private native void initFrame(long gles);
+
+    private native void setSize(long gles,int width,int height);
 
     private native void setRect(long gles,int left,int top,int right,int bottom);
 

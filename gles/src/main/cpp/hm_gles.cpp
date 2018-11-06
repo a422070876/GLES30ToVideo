@@ -64,4 +64,13 @@ Java_com_hyq_hm_gles_GLES_releaseFrame(JNIEnv *env, jobject instance, jlong gles
     // TODO
     hm_gles_model* gles_model = (hm_gles_model *) gles;
     gles_model->free_frame(gles_model);
+}extern "C"
+JNIEXPORT void JNICALL
+Java_com_hyq_hm_gles_GLES_setSize(JNIEnv *env, jobject instance, jlong gles, jint width,
+                                  jint height) {
+
+    // TODO
+    hm_gles_model* gles_model = (hm_gles_model *) gles;
+    gles_model->width = width;
+    gles_model->height = height;
 }

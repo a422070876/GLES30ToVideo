@@ -21,10 +21,11 @@ hm_gles_model * hm_gles_model_create() {
 
     hm_gles_model *gles_model = (hm_gles_model *) malloc(sizeof(hm_gles_model));
 
-
+    gles_model->frame_program = malloc(sizeof(hm_video_glsl_program));
     gles_model->video_program = malloc(sizeof(hm_video_glsl_program));
 
-    gles_model->textures = malloc(sizeof(GLuint));
+    gles_model->textures = malloc(sizeof(GLuint)*2);
+    gles_model->frame_buffers = malloc(sizeof(GLuint));
 
 
     gles_model->st_matrix = malloc(sizeof(float) * 16);
@@ -34,12 +35,14 @@ hm_gles_model * hm_gles_model_create() {
     gles_model->texture_vertex_data = malloc(sizeof(float) * 8);
     gles_model->video_bos = malloc(sizeof(GLuint) * 2);
 
+    gles_model->frame_bos = malloc(sizeof(GLuint) * 2);
+
     gles_model->left = 0;
     gles_model->right = 0;
     gles_model->top = 0;
     gles_model->bottom = 0;
-
-
+    gles_model->width = 0;
+    gles_model->height = 0;
 
     gles_model->vertex_data[0] = 1.0f;
     gles_model->vertex_data[1] = -1.0f;
@@ -73,11 +76,13 @@ hm_gles_model * hm_gles_model_create() {
 }
 
 void hm_gles_model_free(hm_gles_model *gles_model) {
+    free(gles_model->frame_bos);
     free(gles_model->video_bos);
     free(gles_model->texture_vertex_data);
     free(gles_model->vertex_data);
     free(gles_model->st_matrix);
     free(gles_model->textures);
+    free(gles_model->frame_buffers);
     free(gles_model->video_program);
     free(gles_model);
 }

@@ -27,7 +27,13 @@ static const char *fs_video = STR(
             gl_FragColor = video;
         }
 );
-
+static const char *fs_frame = STR(
+        uniform sampler2D tex_v;
+        varying highp vec2 tx;
+        void main() {
+            gl_FragColor = texture2D(tex_v, tx);
+        }
+);
 
 
 
@@ -100,13 +106,21 @@ static void init_video(hm_video_glsl_program *program) {
     program->st_matrix = glGetUniformLocation(pro, "st_matrix");
 }
 
-
+static void init_frame(hm_video_glsl_program *program) {
+    GLuint pro = loadProgram(vs, fs_frame);
+    program->program = pro;
+    program->positon_location = glGetAttribLocation(pro, "position");
+    program->texcoord_location = glGetAttribLocation(pro, "texcoord");
+    program->tex_v = glGetUniformLocation(pro, "tex_v");
+}
 
 
 void hm_gles_glsl_video_program_init(hm_gles_model *gles_model) {
     init_video(gles_model->video_program);
+    init_frame(gles_model->frame_program);
 }
 
 void hm_gles_glsl_video_program_delete(hm_gles_model *gles_model) {
     glDeleteProgram(gles_model->video_program->program);
+    glDeleteProgram(gles_model->frame_program->program);
 }
