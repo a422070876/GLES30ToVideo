@@ -33,8 +33,8 @@ public class EGLUtils {
                 EGL14.EGL_ALPHA_SIZE, 8,
                 EGL14.EGL_RENDERABLE_TYPE, EGL14.EGL_OPENGL_ES2_BIT,
                 EGL_RECORDABLE_ANDROID, 1,
-//                EGL14.EGL_SAMPLE_BUFFERS, 1,
-//                EGL14.EGL_SAMPLES, 4,
+                EGL14.EGL_SAMPLE_BUFFERS, 1,
+                EGL14.EGL_SAMPLES, 4,
                 EGL14.EGL_NONE
         };
 

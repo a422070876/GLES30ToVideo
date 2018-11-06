@@ -18,5 +18,6 @@ find_library(
 target_link_libraries(
                        hm_gles
                        GLESv2
+                       GLESv3
                        jnigraphics
                        ${log-lib} )

@@ -20,10 +20,16 @@ void hm_gles_init_texture(hm_gles_model *gles_model){
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, gles_model->width, gles_model->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
     glBindTexture(GL_TEXTURE_2D, 0);
 
+
+
     glGenFramebuffers(1, gles_model->frame_buffers);
     glBindFramebuffer(GL_FRAMEBUFFER, gles_model->frame_buffers[0]);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, gles_model->textures[1], 0);
+
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+
+
 }
 void hm_gles_delete_texture(hm_gles_model *gles_model){
     glDeleteTextures(1,gles_model->textures);
